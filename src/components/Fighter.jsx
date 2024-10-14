@@ -1,4 +1,4 @@
-function Fighter({ fighter, onSelect, btnText }) {
+function Fighter({ fighter, handleAdd, handleRemove }) {
   return (
     <li>
       <img src={fighter.img} alt={fighter.name} />
@@ -6,7 +6,11 @@ function Fighter({ fighter, onSelect, btnText }) {
       <p>Price: {fighter.price}</p>
       <p>Strength: {fighter.strength}</p>
       <p>Agility: {fighter.agility}</p>
-      <button onClick={onSelect}>{btnText}</button>
+      {handleAdd ? (
+        <button onClick={() => handleAdd(fighter)}>Add</button>
+      ) : (
+        <button onClick={() => handleRemove(fighter)}>Remove</button>
+      )}
     </li>
   );
 }

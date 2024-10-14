@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import Fighter from "./Fighter.jsx";
 import { initialFighters } from "./data.js";
+import Fighter from "./components/Fighter.jsx";
 
 function App() {
   const [team, setTeam] = useState([]);
@@ -14,7 +14,7 @@ function App() {
   const handleAddFighter = (fighter) => {
     if (money >= fighter.price) {
       setTeam([...team, fighter]);
-      setMoney(money - fighter.price);
+      setMoney((prevMoney) => prevMoney - fighter.price);
       setZombieFighters(zombieFighters.filter((f) => f.name != fighter.name));
     } else {
       console.log("Not enough money");
@@ -23,7 +23,7 @@ function App() {
 
   const handleRemoveFighter = (fighter) => {
     setTeam(team.filter((f) => f.name != fighter.name));
-    setMoney(money + fighter.price);
+    setMoney((prevMoney) => prevMoney + fighter.price);
     setZombieFighters([...zombieFighters, fighter]);
   };
 
@@ -36,17 +36,18 @@ function App() {
 
       <h2>Team</h2>
       <ul>
-        {team.length > 0 ? (
+        {team.length ? (
           team.map((fighter) => (
             <Fighter
               key={fighter.name}
               fighter={fighter}
-              onSelect={() => handleRemoveFighter(fighter)}
-              btnText="Remove"
+              handleRemove={handleRemoveFighter}
             />
           ))
         ) : (
-          <p>Pick some team members</p>
+          <li>
+            <p>Pick some team members</p>
+          </li>
         )}
       </ul>
 
@@ -56,8 +57,7 @@ function App() {
           <Fighter
             key={fighter.name}
             fighter={fighter}
-            onSelect={() => handleAddFighter(fighter)}
-            btnText="Add"
+            handleAdd={handleAddFighter}
           />
         ))}
       </ul>
