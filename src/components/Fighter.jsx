@@ -1,4 +1,4 @@
-function Fighter({ fighter, handleAdd, handleRemove }) {
+const Fighter = ({ fighter, handleAdd, handleRemove }) => {
   return (
     <li>
       <img src={fighter.img} alt={fighter.name} />
@@ -13,6 +13,6 @@ function Fighter({ fighter, handleAdd, handleRemove }) {
       )}
     </li>
   );
-}
+};
 
 export default Fighter;

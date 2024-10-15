@@ -3,7 +3,7 @@ import "./App.css";
 import { initialFighters } from "./data.js";
 import Fighter from "./components/Fighter.jsx";
 
-function App() {
+const App = () => {
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
   const [zombieFighters, setZombieFighters] = useState(initialFighters);
@@ -63,6 +63,6 @@ function App() {
       </ul>
     </>
   );
-}
+};
 
 export default App;
